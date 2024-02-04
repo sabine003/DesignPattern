@@ -12,7 +12,7 @@ public class TodoFileManager {
 
     public int insertTodo(String todo, boolean markAsDone) {
         try {
-            FileHandler handler = FileHandlerFactory.createHandler(fileName);
+            FileHandler handler = FileHandlerTest.createHandler(fileName);
             handler.insert(todo, markAsDone);
             return 0;
         } catch (IOException e) {
@@ -23,7 +23,7 @@ public class TodoFileManager {
 
     public int listTodos() {
         try {
-            FileHandler handler = FileHandlerFactory.createHandler(fileName);
+            FileHandler handler = FileHandlerTest.createHandler(fileName);
             handler.list();
             return 0;
         } catch (IOException e) {
