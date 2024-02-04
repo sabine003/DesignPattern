@@ -31,30 +31,30 @@ public class CommandLineExecutor {
         }
 
         String command = positionalArgs.get(0);
-        TodoFileManager fileManager = new TodoFileManager(fileName);
+        TodoFileExec fileExec = new TodoFileExec(fileName);
 
         if (command.equals("insert")) {
             boolean markAsDone = cmd.hasOption("d"); // Check if --done flag is present
-            return insertTodo(positionalArgs, fileManager, markAsDone);
+            return insertTodo(positionalArgs, fileExec, markAsDone);
         } else if (command.equals("list")) {
-            return listTodos(fileManager);
+            return listTodos(fileExec);
         } else {
             System.err.println("Invalid command: " + command);
             return 1;
         }
     }
 
-    private int insertTodo(List<String> positionalArgs, TodoFileManager fileManager, boolean markAsDone) {
+    private int insertTodo(List<String> positionalArgs, TodoFileExec fileExec, boolean markAsDone) {
         if (positionalArgs.size() < 2) {
             System.err.println("Missing TODO name");
             return 1;
         }
 
         String todo = positionalArgs.get(1);
-        return fileManager.insertTodo(todo, markAsDone);
+        return fileExec.insertTodo(todo, markAsDone);
     }
 
-    private int listTodos(TodoFileManager fileManager) {
-        return fileManager.listTodos();
+    private int listTodos(TodoFileExec fileExec) {
+        return fileExec.listTodos();
     }
 }
