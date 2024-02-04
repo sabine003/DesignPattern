@@ -1,6 +1,6 @@
 package com.fges.todoapp;
 
-public class FileHandlerFactory {
+public class FileHandlerTest {
 
     public static FileHandler createHandler(String fileName) {
         if (fileName.endsWith(".json")) {
