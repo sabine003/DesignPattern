@@ -2,11 +2,11 @@ package com.fges.todoapp;
 
 import java.io.IOException;
 
-public class TodoFileManager {
+public class TodoFileExec {
 
     private final String fileName;
 
-    public TodoFileManager(String fileName) {
+    public TodoFileExec(String fileName) {
         this.fileName = fileName;
     }
 
