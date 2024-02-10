@@ -48,7 +48,17 @@ First of all I changed FileHandlerTest to FileHandlerFactory
 
 Since in my previous code i had a bad service abstraction that makes it hard to add other commands in the futur, so i refactured 'CommandLineExecutor' for better command handling. 
 I used a Command interface and command classes like InsertCommand and ListCommand that encapsulates each command's execution logic. This design makes it easy to add new commands in the future without modifying existing code, adhering to the Open/Closed Principle.
-  
+
+I fixed the --done, as it was not implemented right, now all the four arguments works fine
+
+✔️ ./exec.sh insert "I am done" --done -s file.json
+
+✔️ ./exec.sh insert "I am not done" -s file.json 
+
+✔️ ./exec.sh list -s file.json
+
+✔️ ./exec.sh list -s file.json --done
+
 > - Anything relevant
 > 
 > **Add a link to schemas describing your architecture (UML or not but add a legend)**
