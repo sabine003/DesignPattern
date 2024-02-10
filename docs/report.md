@@ -23,7 +23,11 @@ The original code violates the open-closed principle because it supports two typ
 > - What helped you and why
 > - **What did you find difficult**
 
+**TP1**
 I found it diffuclt to know from where exactly should i start and how to link the classes together.
+
+**TP3**
+I know that I should implement the type object instead of string but that requires for me to change a lot of things in my code which i am working on but it requires a little bit more time, so i will updated as soon as i am done with it 😅
 > - What did not help you
 > - **What did you need to change**
 
@@ -44,12 +48,12 @@ Checking for the --done Flag: Inside the execute method, I checked if the --done
 Passing markAsDone to insertTodo: I modified the insertTodo method in the CommandLineExecutor class to accept an additional parameter boolean markAsDone. This parameter represents whether the todo should be marked as done. When calling the insertTodo method, I passed the value of markAsDone based on whether the --done flag was present.
 
 **TP3**
-First of all I changed FileHandlerTest to FileHandlerFactory
+1- First of all I changed FileHandlerTest to FileHandlerFactory
 
-Since in my previous code i had a bad service abstraction that makes it hard to add other commands in the futur, so i refactured 'CommandLineExecutor' for better command handling. 
+2- Since in my previous code i had a bad service abstraction that makes it hard to add other commands in the futur, so i refactured 'CommandLineExecutor' for better command handling. 
 I used a Command interface and command classes like InsertCommand and ListCommand that encapsulates each command's execution logic. This design makes it easy to add new commands in the future without modifying existing code, adhering to the Open/Closed Principle.
 
-I fixed the --done, as it was not implemented right, now all the four arguments works fine
+3- I fixed the --done, as it was not implemented right, now all the four arguments work fine
 
 ✔️ ./exec.sh insert "I am done" --done -s file.json
 
