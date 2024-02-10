@@ -1,10 +1,9 @@
 package com.fges.todoapp;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
-import com.fasterxml.jackson.databind.node.MissingNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -23,43 +22,38 @@ public class JsonFileHandler implements FileHandler {
     public void insert(String todo, boolean markAsDone) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         Path filePath = Paths.get(fileName);
-        String fileContent = "";
+        ArrayNode arrayNode;
 
         if (Files.exists(filePath)) {
-            fileContent = Files.readString(filePath);
+            String fileContent = Files.readString(filePath);
+            arrayNode = (ArrayNode) mapper.readTree(fileContent);
+        } else {
+            arrayNode = JsonNodeFactory.instance.arrayNode();
         }
 
-        JsonNode actualObj = mapper.readTree(fileContent);
+        ObjectNode newNode = JsonNodeFactory.instance.objectNode();
+        newNode.put("text", todo);
+        newNode.put("done", markAsDone);
+        arrayNode.add(newNode);
 
-        if (actualObj instanceof MissingNode) {
-            actualObj = JsonNodeFactory.instance.arrayNode();
-        }
-
-        if (actualObj instanceof ArrayNode arrayNode) {
-            arrayNode.add(todo);
-        }
-
-        Files.writeString(filePath, actualObj.toString());
+        Files.writeString(filePath, mapper.writerWithDefaultPrettyPrinter().writeValueAsString(arrayNode));
     }
 
     @Override
-    public void list() throws IOException {
+    public void list(boolean onlyDone) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         Path filePath = Paths.get(fileName);
-        String fileContent = "";
 
         if (Files.exists(filePath)) {
-            fileContent = Files.readString(filePath);
-        }
-
-        JsonNode actualObj = mapper.readTree(fileContent);
-
-        if (actualObj instanceof MissingNode) {
-            actualObj = JsonNodeFactory.instance.arrayNode();
-        }
-
-        if (actualObj instanceof ArrayNode arrayNode) {
-            arrayNode.forEach(node -> System.out.println("- " + node.toString()));
+            String fileContent = Files.readString(filePath);
+            ArrayNode arrayNode = (ArrayNode) mapper.readTree(fileContent);
+            arrayNode.forEach(node -> {
+                boolean done = node.get("done").asBoolean();
+                if (!onlyDone || done) {
+                    String output = done ? "Done: " : "";
+                    System.out.println("- " + output + node.get("text").asText());
+                }
+            });
         }
     }
 }
