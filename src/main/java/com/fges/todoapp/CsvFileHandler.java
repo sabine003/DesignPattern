@@ -4,8 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.stream.Collectors;
+
 
 public class CsvFileHandler implements FileHandler {
 
@@ -28,23 +27,24 @@ public class CsvFileHandler implements FileHandler {
             fileContent += "\n";
         }
 
-        fileContent += todo;
+        fileContent += "\"" + todo + "\"," + markAsDone;
 
         Files.writeString(filePath, fileContent);
     }
 
     @Override
-    public void list() throws IOException {
+    public void list(boolean onlyDone) throws IOException {
         Path filePath = Paths.get(fileName);
-        String fileContent = "";
 
         if (Files.exists(filePath)) {
-            fileContent = Files.readString(filePath);
+            Files.lines(filePath).forEach(line -> {
+                String[] parts = line.split(",");
+                boolean done = Boolean.parseBoolean(parts[1]);
+                if (!onlyDone || done) {
+                    String output = done ? "Done: " : "";
+                    System.out.println("- " + output + parts[0].replaceAll("\"", ""));
+                }
+            });
         }
-
-        System.out.println(Arrays.stream(fileContent.split("\n"))
-                .map(todo -> "- " + todo)
-                .collect(Collectors.joining("\n"))
-        );
     }
 }
