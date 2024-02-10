@@ -1,34 +1,19 @@
 package com.fges.todoapp;
 
 import java.io.IOException;
+import java.util.List;
 
-public class TodoFileExec {
+public class ListCommand implements Command {
+    private final TodoFileExec fileExec;
+    private final boolean onlyDone;
 
-    private final String fileName;
-
-    public TodoFileExec(String fileName) {
-        this.fileName = fileName;
+    public ListCommand(TodoFileExec fileExec, boolean onlyDone) {
+        this.fileExec = fileExec;
+        this.onlyDone = onlyDone;
     }
 
-    public int insertTodo(String todo, boolean markAsDone) {
-        try {
-            FileHandler handler = FileHandlerTest.createHandler(fileName);
-            handler.insert(todo, markAsDone);
-            return 0;
-        } catch (IOException e) {
-            System.err.println("Error while inserting TODO: " + e.getMessage());
-            return 1;
-        }
-    }
-
-    public int listTodos() {
-        try {
-            FileHandler handler = FileHandlerTest.createHandler(fileName);
-            handler.list();
-            return 0;
-        } catch (IOException e) {
-            System.err.println("Error while listing TODOs: " + e.getMessage());
-            return 1;
-        }
+    @Override
+    public int execute(List<String> args) throws IOException {
+        return fileExec.listTodos(onlyDone);
     }
 }
