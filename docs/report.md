@@ -42,6 +42,12 @@ Added the --done Option: I added the --done option to the Options object using c
 Checking for the --done Flag: Inside the execute method, I checked if the --done flag is present in the command-line arguments using cmd.hasOption("d"). If the --done flag is present, it means that the user wants to mark the todo as done; otherwise, it remains as not done.
 
 Passing markAsDone to insertTodo: I modified the insertTodo method in the CommandLineExecutor class to accept an additional parameter boolean markAsDone. This parameter represents whether the todo should be marked as done. When calling the insertTodo method, I passed the value of markAsDone based on whether the --done flag was present.
+
+**TP3**
+First of all I changed FileHandlerTest to FileHandlerFactory
+
+Since in my previous code i had a bad service abstraction that makes it hard to add other commands in the futur, so i refactured 'CommandLineExecutor' for better command handling. 
+I used a Command interface and command classes like InsertCommand and ListCommand that encapsulates each command's execution logic. This design makes it easy to add new commands in the future without modifying existing code, adhering to the Open/Closed Principle.
   
 > - Anything relevant
 > 
