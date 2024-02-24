@@ -24,7 +24,7 @@ public class CommandLineExecutor {
         }
 
         String commandKey = positionalArgs.get(0);
-        TodoFileExec fileExec = new TodoFileExec(fileName);
+        TodoFileStorage fileExec = new TodoFileStorage(fileName);
         Command command;
 
         switch (commandKey) {
@@ -40,7 +40,7 @@ public class CommandLineExecutor {
                     System.err.println("Both source and output files must be provided for migrate command");
                     return 1;
                 }
-                TodoFileExec sourceFileExec = new TodoFileExec(fileName);
+                TodoFileStorage sourceFileExec = new TodoFileStorage(fileName);
                 command = new MigrateCommand(sourceFileExec, outputFileName);
                 break;
             default:
