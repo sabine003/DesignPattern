@@ -4,11 +4,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TodoFileExec {
+public class TodoFileStorage {
 
     private final String fileName;
 
-    public TodoFileExec(String fileName) {
+    public TodoFileStorage(String fileName) {
         this.fileName = fileName;
     }
 
