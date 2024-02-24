@@ -10,8 +10,10 @@ public class CommandLineExecutor {
         Options cliOptions = new Options();
         cliOptions.addRequiredOption("s", "source", true, "File containing the todos");
         cliOptions.addOption("d", "done", false, "Mark todo as done");
+        cliOptions.addOption("o", "output", true, "Output file for migration todos");
 
         CommandLine cmd = parser.parse(cliOptions, args);
+
         String fileName = cmd.getOptionValue("s");
         boolean markAsDone = cmd.hasOption("d");
         List<String> positionalArgs = cmd.getArgList();
@@ -31,6 +33,15 @@ public class CommandLineExecutor {
                 break;
             case "list":
                 command = new ListCommand(fileExec, markAsDone);
+                break;
+            case "migrate":
+                String outputFileName = cmd.getOptionValue("o");
+                if (fileName == null || outputFileName == null) {
+                    System.err.println("Both source and output files must be provided for migrate command");
+                    return 1;
+                }
+                TodoFileExec sourceFileExec = new TodoFileExec(fileName);
+                command = new MigrateCommand(sourceFileExec, outputFileName);
                 break;
             default:
                 System.err.println("Invalid command: " + commandKey);
