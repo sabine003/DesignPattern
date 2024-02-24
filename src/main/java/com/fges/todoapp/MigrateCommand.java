@@ -3,10 +3,10 @@ import java.io.IOException;
 import java.util.List;
 
 public class MigrateCommand implements Command {
-    private final TodoFileExec sourceFileExec;
+    private final TodoFileStorage sourceFileExec;
     private final String outputFileName;
 
-    public MigrateCommand(TodoFileExec sourceFileExec, String outputFileName) {
+    public MigrateCommand(TodoFileStorage sourceFileExec, String outputFileName) {
         this.sourceFileExec = sourceFileExec;
         this.outputFileName = outputFileName;
     }
@@ -16,7 +16,7 @@ public class MigrateCommand implements Command {
         try {
             List<String> sourceTodos = sourceFileExec.getAllTodos();
 
-            TodoFileExec outputFileExec = new TodoFileExec(outputFileName);
+            TodoFileStorage outputFileExec = new TodoFileStorage(outputFileName);
             List<String> existingTodos = outputFileExec.getAllTodos();
 
 
