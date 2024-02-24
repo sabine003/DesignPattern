@@ -29,6 +29,7 @@ I found it diffuclt to know from where exactly should i start and how to link th
 **TP2.2**
 I know that I should implement the type object instead of string but that requires for me to change a lot of things in my code which i am working on but it requires a little bit more time, so i will updated as soon as i am done with it 😅
 > - What did not help you
+
 > - **What did you need to change**
 
 **TP1**
@@ -64,7 +65,78 @@ I used a Command interface and command classes like InsertCommand and ListComman
 ✔️ ./exec.sh list -s file.json --done
 
 > - Anything relevant
-> 
+> - **What did you need to change**
+
+
+# TP3 Todo Application Documentation
+
+## Overview
+This Todo Application allows users to manage their todo items through a command-line interface. It supports adding todos, listing todos, and migrating todos between different file formats (CSV and JSON).
+
+## Classes and Methods
+
+### `App.java`
+- **Class:** Main class that bootstraps the application.
+- **Methods:**
+  - `main(String[] args)`: Entry point of the application. It parses the command-line arguments and executes the corresponding command.
+  - `exec(String[] args)`: Alternative method for executing commands, useful for integration testing.
+
+### `Command.java`
+- **Interface:** Defines the structure for command classes.
+- **Methods:**
+  - `execute(List<String> args)`: Executes the command with the given arguments.
+
+### `CommandLineExecutor.java`
+- **Class:** Processes command-line arguments and executes the appropriate command based on input.
+- **Methods:**
+  - `execute(CommandLineParser parser, String[] args)`: Parses the command-line arguments and executes the corresponding command.
+
+### `CsvFileHandler.java`
+- **Class:** Handles operations for CSV file format.
+- **Methods:**
+  - `insert(String todo, boolean markAsDone)`: Inserts a new todo item into a CSV file.
+  - `list(boolean onlyDone)`: Lists todo items from a CSV file, optionally filtering only completed items.
+
+### `FileHandler.java`
+- **Interface:** Defines the structure for file handler classes.
+- **Methods:**
+  - `insert(String todo, boolean markAsDone)`: Inserts a new todo item into a file.
+  - `list(boolean onlyDone)`: Lists todo items from a file, optionally filtering only completed items.
+
+### `FileHandlerFactory.java`
+- **Class:** Factory for creating file handler objects based on file format.
+- **Methods:**
+  - `createHandler(String fileName)`: Returns a `FileHandler` instance appropriate for the file's format.
+
+### `InsertCommand.java`
+- **Class:** Represents the "insert" command for adding new todo items.
+- **Methods:**
+  - `execute(List<String> args)`: Executes the insert command.
+
+### `JsonFileHandler.java`
+- **Class:** Handles operations for JSON file format.
+- **Methods:**
+  - `insert(String todo, boolean markAsDone)`: Inserts a new todo item into a JSON file.
+  - `list(boolean onlyDone)`: Lists todo items from a JSON file, optionally filtering only completed items.
+
+### `ListCommand.java`
+- **Class:** Represents the "list" command for listing todo items.
+- **Methods:**
+  - `execute(List<String> args)`: Executes the list command.
+
+### `TodoFileExec.java`
+- **Class:** Executes operations on todo files.
+- **Methods:**
+  - `insertTodo(String todo, boolean markAsDone)`: Wrapper for inserting a todo item, handling file operations.
+  - `listTodos(boolean onlyDone)`: Wrapper for listing todo items, handling file operations.
+  - `getAllTodos()`: Retrieves all todo items from the file.
+
+### `MigrateCommand.java`
+- **Class:** Represents the "migrate" command for transferring todos between files.
+- **Methods:**
+  - `execute(List<String> args)`: Executes the migration of todo items from the source file to the destination file.
+
+
 > **Add a link to schemas describing your architecture (UML or not but add a legend)**
 
 **TP1**
@@ -75,6 +147,7 @@ I used a Command interface and command classes like InsertCommand and ListComman
 **TP2**
 
 ![tp2UML](https://github.com/sabine003/DesignPattern/assets/88795763/95b2c6c1-fec2-4354-b7ee-7caa7b8f03da)
+
 
 > Remember: it is ok to make mistakes, you will have time to spot them later.
 > 
