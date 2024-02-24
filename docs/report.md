@@ -148,6 +148,10 @@ This Todo Application allows users to manage their todo items through a command-
 
 ![tp2UML](https://github.com/sabine003/DesignPattern/assets/88795763/95b2c6c1-fec2-4354-b7ee-7caa7b8f03da)
 
+**TP3**
+
+![TP3 drawio](https://github.com/sabine003/DesignPattern/assets/88795763/dd69a829-55ed-4fc3-8a5e-1eb71d372691)
+
 
 > Remember: it is ok to make mistakes, you will have time to spot them later.
 > 
