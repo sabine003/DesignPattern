@@ -45,3 +45,6 @@ Modify file handlers: Ensure CsvFileHandler and JsonFileHandler are updated to r
 5- Adding a New Interface to the Project
 Define the interface: Create a new interface in the com.fges.todoapp package that declares the methods to be implemented.
 Implement the interface: Create classes that implement your new interface, providing specific functionalities.
+
+
+![image](https://github.com/sabine003/DesignPattern/assets/88795763/a8de980c-4847-49fb-a883-6ca5bf1c9ea6)
